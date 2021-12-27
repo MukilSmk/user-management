@@ -1,5 +1,10 @@
 {
     "env":{
         "JWT_KEY":"secret"
-    }
+    },
+    "ext":".js, .mjs, .json, .yaml"
+
 }
+
+
+

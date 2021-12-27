@@ -4,13 +4,13 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/users.js'
 import swaggerUI from 'swagger-ui-express'
-import YAML from yamljs
-import swaggerJsdocs from YAML.load('./doc')
+import YAML from 'yamljs'
+const swaggerJsdocs = YAML.load('./src/api.yaml')
 
 /**
  * express declaration
  */
-import app from express()
+const app = express()
 app.use(morgan('dev'));
 
 
@@ -29,6 +29,9 @@ mongoose.connection.once('open',function(){
  */
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsdocs))
 
 /**
  * Routes Middleware

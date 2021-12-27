@@ -1,0 +1,229 @@
+swagger:  "2.0"
+info:
+  title: USER API,
+  description: This is a documentation
+  version: 1.0,
+  contact:
+    email:  mukilselvam27@gmail.com
+  liscence:
+    name: Apache 2.0
+    url: "http://apache.org/"
+  servers: 
+    -url: "http://localhost:3000"
+    description: This is my local server
+    -url: "http://company.com/"
+    description: This is my company server
+
+schemes: [http,https]
+
+paths:
+  #Returns the Array of users
+  /users:
+    get:
+      summary: Returns the users
+      description: It is just returning all the user details
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              email:
+                type: string
+              mobile:
+                type: number
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+#Returns the user of a particular id
+  /users/{userId}:
+    get:
+      summary: Creates the  users
+      description: It is just creating the user details
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+              name:
+                type: string
+              email:
+                type: string
+              mobile:
+                type: number
+              
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+#Create the user
+  /users/signup:
+    post:
+      summary: Posting Data
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              name:
+                  type: string
+              email:
+                  type: string
+              mobile:
+                  type: number
+              password:
+                  type: string
+            
+      responses:
+        responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              _id:
+                  type: integer
+              name:
+                  type: string
+              email:
+                  type: string
+              mobile:
+                  type: number
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+
+#login the users
+  /users/login:
+    post:
+      summary: Logging in Data by getting user input
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              token:
+                type: string
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+#Update the User details
+  /users/update/{userId}:
+    patch:
+      summary: Updating the data of the Users
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              name:
+                  type: string
+                  required: true
+              email:
+                  type: string
+                  required: true
+              password:
+                  type: string
+                  required: true
+              ph_no:
+                  type: number        
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+#Delete the User details
+  /users/delete/{userId}:
+    delete:
+      summary:  Deleting the user
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              data:
+                type: string
+        500:
+          description: Internal Error
+        400:
+          description: User Error
+
+
+
+
