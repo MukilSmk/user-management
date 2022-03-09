@@ -1,8 +1,8 @@
 swagger:  "2.0"
 info:
-  title: USER API,
-  description: This is a documentation
-  version: 1.0,
+  title: USER API
+  description: CRUD DOCUMENTATION
+  version: 1.0.0
   contact:
     email:  mukilselvam27@gmail.com
   liscence:
@@ -44,7 +44,7 @@ paths:
 #Returns the user of a particular id
   /users/{userId}:
     get:
-      summary: Creates the  users
+      summary: Returns the user of a particular id
       description: It is just creating the user details
       parameters:
         - name: userId

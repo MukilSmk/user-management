@@ -1,9 +1,11 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-const User = require('../models/user')
+// const User = require('../models/user')
+import {User} from '../models/user'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 import { authSchema } from '../helpers/validator'
+import { token } from '../middleware/check-auth'
 import Joi from 'joi'
 
 
@@ -22,8 +24,7 @@ const transporter = nodemailer.createTransport({
     
 /**
  * Function that creates a new user
- * 
- * Valid user information shoul be passed to create a user
+ * Valid user information should be passed to create a user
  */
 exports.signup = async (req,res,next)=>{
   
@@ -82,7 +83,7 @@ exports.signup = async (req,res,next)=>{
             console.log(err);
             res.status(500).json({
                 error : err,
-                message:'E-mail/Mobile Already taken'
+                message: 'Invalid Details'
             })
          
         
@@ -113,7 +114,7 @@ exports.login =async (req,res,next) => {
                const token = jwt.sign({
                     email:user[0].email,
                     userId : user[0]._id
-                },process.env.JWT_KEY,
+                },"secret",
                 {
                     expiresIn : "1h"
                 });
@@ -146,14 +147,13 @@ exports.login =async (req,res,next) => {
 exports.update = (req,res,next) =>{
     const id = req.params.userId;
     
-    User.update({_id : id},{$set: req.body})
+    User.updateMany({_id : id},{$set: req.body})
     .exec()
     .then(result => {
         console.log(result);
         res.status(200).json(result);  
     })
     .catch(err => {
-        console.log(error);
         res.status(500).json({
             error : err
         });
@@ -187,7 +187,6 @@ exports.delete_user = (req,res,next) =>{
 exports.all_users =(req,res,next) =>{
     const {page = req.params.page, limit = req.params.limit} = req.query
     User.find().limit(limit*1).skip((page-1)*limit)
-
     .select('name email mobile')
     .exec()
     .then(docs => {

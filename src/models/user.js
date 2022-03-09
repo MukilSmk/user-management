@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-
+/**
+ * User Model
+ */
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -11,4 +13,6 @@ const userSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('User',userSchema);
+// module.exports = mongoose.model('User',userSchema);
+
+export const User = mongoose.model('User',userSchema);

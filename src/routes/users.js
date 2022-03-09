@@ -7,7 +7,7 @@ import { all_users } from '../controllers/users';
 import { user_by_id } from '../controllers/users';
 import {authSchema} from '../helpers/validator' 
 
-const router = express.Router();
+ const router = express.Router();
 /**
  * Routes
  */
@@ -19,5 +19,5 @@ router.delete('/delete/:userId',delete_user);
 router.get('/',all_users);
 router.get('/:userId',user_by_id);
 
+export default router
 
-module.exports = router;

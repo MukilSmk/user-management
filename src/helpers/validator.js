@@ -1,7 +1,7 @@
 import Joi from 'joi'
 
 
-const authSchema = Joi.object({
+export const authSchema = Joi.object({
     name : Joi.string().required().messages({
         'string.base': `"name" should be a type of 'text'`,
         'string.empty': `"name" cannot be an empty field`,
@@ -13,9 +13,4 @@ const authSchema = Joi.object({
 });
 
 
-
-
-
-
-
-module.exports = {authSchema}
+// module.exports = {authSchema}

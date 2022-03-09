@@ -7,6 +7,7 @@ import swaggerUI from 'swagger-ui-express'
 import YAML from 'yamljs'
 const swaggerJsdocs = YAML.load('./src/api.yaml')
 
+ 
 /**
  * express declaration
  */
@@ -31,6 +32,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
+/**
+ *Swagger Route Middleware
+ */
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsdocs))
 
 /**
@@ -53,16 +57,18 @@ app.use((error, req, res, next) => {
             message: error.message
         }
     });
-});
-
-
-
-
-
-app.listen(port, () =>{
-    console.log(`Server running on ${port}`)
 })
 
 
 
 
+/**
+ * Server statement
+ */
+ export const server = app.listen(port, () =>{
+    console.log(`Server running on ${port}`)
+})
+
+
+
+// module.exports = servers
