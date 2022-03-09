@@ -16,7 +16,7 @@ router.post('/signup',signup);
 router.post('/login',login);
 router.patch('/update/:userId',update);
 router.delete('/delete/:userId',delete_user);
-router.get('/',all_users);
+router.get('/all-users',all_users);
 router.get('/:userId',user_by_id);
 
 export default router

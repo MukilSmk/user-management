@@ -185,8 +185,7 @@ exports.delete_user = (req,res,next) =>{
  */
 
 exports.all_users =(req,res,next) =>{
-    const {page = req.params.page, limit = req.params.limit} = req.query
-    User.find().limit(limit*1).skip((page-1)*limit)
+    User.find()
     .select('name email mobile')
     .exec()
     .then(docs => {
